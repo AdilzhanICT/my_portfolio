@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Цветочный магазин Весенний букет — свежие букеты с доставкой по городу">
+    <title>Весенний букет — Доставка цветов</title>
+    <style>
+        :root {
+            --color-primary: #E91E8C;
+            --color-secondary: #7CB342;
+            --color-accent: #FFD54F;
+            --color-soft: #FCE4EC;
+            --color-bg: #FAFFF8;
+            --color-text: #2E2E2E;
+            --color-muted: #757575;
+            --color-white: #FFFFFF;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            font-size: 16px;
+            color: var(--color-text);
+            background-color: var(--color-bg);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .logo-text { font-family: 'Georgia', 'Times New Roman', serif; }
+
+        /* Header Styles */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 200;
+            background: var(--color-white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-top {
+            height: 36px;
+            background: var(--color-primary);
+            color: var(--color-white);
+            font-size: 13px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%;
+        }
+
+        .header-middle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            gap: 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .logo-text {
+            font-size: 22px;
+            color: var(--color-primary);
+            font-weight: bold;
+        }
+
+        .search-bar {
+            display: flex;
+            flex: 1;
+            max-width: 380px;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 8px 16px;
+            border: 2px solid var(--color-primary);
+            border-radius: 24px 0 0 24px;
+            outline: none;
+        }
+
+        .search-bar button {
+            background: var(--color-primary);
+            border: 2px solid var(--color-primary);
+            color: white;
+            padding: 0 15px;
+            border-radius: 0 24px 24px 0;
+            cursor: pointer;
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 20px;
+            font-size: 18px;
+        }
+
+        .nav-bar {
+            background: var(--color-white);
+            border-top: 1px solid #eee;
+            padding: 10px 5%;
+        }
+
+        .nav-menu {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--color-text);
+            font-size: 15px;
+            position: relative;
+            padding-bottom: 4px;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--color-primary);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .nav-menu a:hover { color: var(--color-primary); }
+        .nav-menu a:hover::after { transform: scaleX(1); }
+
+        .menu-toggle { display: none; font-size: 24px; cursor: pointer; }
+
+        /* Ticker */
+        .ticker-wrap {
+            height: 40px;
+            background: var(--color-accent);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+
+        .ticker {
+            white-space: nowrap;
+            padding-right: 100%;
+            display: inline-block;
+            animation: ticker 30s linear infinite;
+            font-size: 14px;
+        }
+
+        @keyframes ticker {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 90vh;
+            background: linear-gradient(135deg, #FCE4EC 0%, #F8BBD0 40%, #E8F5E9 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px 5%;
+        }
+
+        .hero-emojis {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            color: var(--color-primary);
+            margin-bottom: 15px;
+            max-width: 800px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--color-muted);
+            margin-bottom: 30px;
+            max-width: 600px;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn {
+            padding: 14px 36px;
+            border-radius: 28px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--color-primary);
+            color: white;
+            border: none;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--color-secondary);
+            color: var(--color-secondary);
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        /* Catalog Section */
+        .catalog { padding: 80px 5%; }
+        .catalog h2 { text-align: center; margin-bottom: 50px; font-size: 2.5rem; }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--color-white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            position: relative;
+            transition: all 0.35s ease;
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            from { transform: translateY(40px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .card:hover { transform: translateY(-8px); box-shadow: 0 12px 24px rgba(0,0,0,0.15); }
+
+        .card-img {
+            height: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 5rem;
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: var(--color-primary);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .card-body { padding: 20px; }
+        .card-body h3 { margin-bottom: 5px; }
+        .card-body p { color: var(--color-muted); font-size: 0.9rem; margin-bottom: 15px; }
+        .card-body strong { color: var(--color-primary); font-size: 1.3rem; display: block; margin-bottom: 15px; }
+
+        .btn-card {
+            width: 100%;
+            background: var(--color-secondary);
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .btn-card:hover { background: #689f38; }
+
+        /* Order Form */
+        .order { padding: 80px 5%; background: var(--color-soft); }
+        .order-container {
+            max-width: 680px;
+            margin: auto;
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+        }
+        .order h2 { text-align: center; margin-bottom: 30px; }
+        .order-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        .order-form .full-width { grid-column: 1 / -1; }
+        
+        .order-form input, .order-form select, .order-form textarea {
+            border: 2px solid #F8BBD0;
+            border-radius: 10px;
+            padding: 0.75rem 1rem;
+            outline: none;
+            font-family: inherit;
+        }
+
+        .order-form input:focus, .order-form select:focus, .order-form textarea:focus {
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(233,30,140,0.15);
+        }
+
+        .btn-order {
+            background: var(--color-primary);
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 28px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .btn-order:hover { transform: scale(1.02); }
+
+        /* Reviews */
+        .reviews { padding: 80px 5%; background: var(--color-white); }
+        .reviews h2 { text-align: center; margin-bottom: 50px; }
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        .review-card {
+            background: var(--color-bg);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border-left: 4px solid var(--color-primary);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        .stars { color: var(--color-accent); font-size: 1.2rem; margin-bottom: 10px; }
+        .author { display: flex; align-items: center; gap: 10px; margin-top: 15px; font-weight: bold; }
+
+        /* Location */
+        .location { padding: 80px 5%; }
+        .location h2 { text-align: center; margin-bottom: 50px; }
+        .location-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+        .loc-info p { margin-bottom: 10px; font-size: 1.1rem; }
+        iframe { border-radius: 16px; box-shadow: 0 4px 16px rgba(0,0,0,0.1); width: 100%; height: 400px; border: 0; }
+
+        /* Footer */
+        footer {
+            background: #2E2E2E;
+            color: white;
+            padding: 60px 5% 20px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .footer-col h4 { margin-bottom: 20px; font-family: Georgia, serif; font-size: 1.2rem; }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col a { color: #ccc; text-decoration: none; }
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.15);
+            padding-top: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #999;
+        }
+
+        /* Accessibility */
+        :focus-visible { outline: 3px solid var(--color-secondary); outline-offset: 2px; }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .header-top { flex-direction: column; height: auto; padding: 5px; text-align: center; }
+            .header-middle { flex-direction: column; }
+            .search-bar { max-width: 100%; order: 3; }
+            .menu-toggle { display: block; }
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+                padding: 20px 0;
+            }
+            .nav-menu.active { display: flex; }
+            .hero h1 { font-size: 2.2rem; }
+            .order-form { grid-template-columns: 1fr; }
+            .location-grid, .footer-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-top">
+            <span>+7 (777) 123-45-67</span>
+            <span>Доставка по городу ежедневно 8:00–22:00</span>
+        </div>
+        <div class="header-middle">
+            <a href="#" class="logo">
+                <span style="font-size: 30px;">🌸</span>
+                <span class="logo-text">Весенний букет</span>
+            </a>
+            <div class="search-bar">
+                <input type="search" placeholder="Поиск букета...">
+                <button aria-label="Поиск">🔍</button>
+            </div>
+            <div class="header-icons">
+                <a href="#" title="Корзина" style="text-decoration:none">🛒</a>
+                <a href="#" title="Войти" style="text-decoration:none">👤</a>
+                <span class="menu-toggle" id="mobile-menu">☰</span>
+            </div>
+        </div>
+        <nav class="nav-bar">
+            <ul class="nav-menu" id="nav-list">
+                <li><a href="#catalog">Каталог</a></li>
+                <li><a href="#">Букеты невесты</a></li>
+                <li><a href="#">Корпоративные</a></li>
+                <li><a href="#">Доставка</a></li>
+                <li><a href="#about">О нас</a></li>
+                <li><a href="#location">Контакты</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="ticker-wrap">
+        <div class="ticker">
+            <span>🌷 Скидка 15% на тюльпаны до конца апреля &nbsp;&nbsp; ❀ &nbsp;&nbsp; Бесплатная доставка при заказе от 3 000 ₸ &nbsp;&nbsp; ❀ &nbsp;&nbsp; Новая коллекция пионов уже в продаже &nbsp;&nbsp; ❀ &nbsp;&nbsp; Подарочная упаковка в подарок каждому заказу &nbsp;&nbsp; ❀ &nbsp;</span>
+            <span>🌷 Скидка 15% на тюльпаны до конца апреля &nbsp;&nbsp; ❀ &nbsp;&nbsp; Бесплатная доставка при заказе от 3 000 ₸ &nbsp;&nbsp; ❀ &nbsp;&nbsp; Новая коллекция пионов уже в продаже &nbsp;&nbsp; ❀ &nbsp;&nbsp; Подарочная упаковка в подарок каждому заказу &nbsp;&nbsp; ❀ &nbsp;</span>
+            <span>🌷 Скидка 15% на тюльпаны до конца апреля &nbsp;&nbsp; ❀ &nbsp;&nbsp; Бесплатная доставка при заказе от 3 000 ₸ &nbsp;&nbsp; ❀ &nbsp;&nbsp; Новая коллекция пионов уже в продаже &nbsp;&nbsp; ❀ &nbsp;&nbsp; Подарочная упаковка в подарок каждому заказу &nbsp;&nbsp; ❀ &nbsp;</span>
+        </div>
+    </div>
+
+    <main>
+        <section class="hero">
+            <div class="hero-emojis">🌸 🌼 🌺 🌻 🌷</div>
+            <h1>Цветы, которые говорят за вас</h1>
+            <p>Свежие букеты с доставкой за 2 часа. Составим композицию для любого повода.</p>
+            <div class="hero-btns">
+                <a href="#catalog" class="btn btn-primary">Выбрать букет</a>
+                <a href="#" class="btn btn-outline">Как сделать заказ?</a>
+            </div>
+        </section>
+
+        <section class="catalog" id="catalog">
+            <h2>Популярные букеты</h2>
+            <div class="grid-container">
+                <article class="card" style="animation-delay: 0.1s;">
+                    <div class="card-badge">Хит</div>
+                    <div class="card-img" style="background: linear-gradient(45deg, #FCE4EC, #F8BBD0);">🌸</div>
+                    <div class="card-body">
+                        <h3>Розовая нежность</h3>
+                        <p>розы, лизиантус, эвкалипт</p>
+                        <strong>4 500 ₸</strong>
+                        <button class="btn-card">В корзину</button>
+                    </div>
+                </article>
+                <article class="card" style="animation-delay: 0.2s;">
+                    <div class="card-badge">Новинка</div>
+                    <div class="card-img" style="background: linear-gradient(45deg, #FFF9C4, #FFECB3);">🌼</div>
+                    <div class="card-body">
+                        <h3>Весенний день</h3>
+                        <p>тюльпаны, нарциссы, мимоза</p>
+                        <strong>3 200 ₸</strong>
+                        <button class="btn-card">В корзину</button>
+                    </div>
+                </article>
+                <article class="card" style="animation-delay: 0.3s;">
+                    <div class="card-badge">Хит</div>
+                    <div class="card-img" style="background: linear-gradient(45deg, #F8BBD0, #F06292);">🌺</div>
+                    <div class="card-body">
+                        <h3>Пионовое облако</h3>
+                        <p>пионы, гипсофила, зелень</p>
+                        <strong>6 800 ₸</strong>
+                        <button class="btn-card">В корзину</button>
+                    </div>
+                </article>
+                <article class="card" style="animation-delay: 0.4s;">
+                    <div class="card-img" style="background: linear-gradient(45deg, #FFE082, #FFB300);">🌻</div>
+                    <div class="card-body">
+                        <h3>Солнечный луг</h3>
+                        <p>подсолнухи, ромашки, лаванда</p>
+                        <strong>3 900 ₸</strong>
+                        <button class="btn-card">В корзину</button>
+                    </div>
+                </article>
+                <article class="card" style="animation-delay: 0.5s;">
+                    <div class="card-img" style="background: linear-gradient(45deg, #E1BEE7, #CE93D8);">💜</div>
+                    <div class="card-body">
+                        <h3>Лиловый бриз</h3>
+                        <p>лаванда, эустома, вербена</p>
+                        <strong>5 100 ₸</strong>
+                        <button class="btn-card">В корзину</button>
+                    </div>
+                </article>
+                <article class="card" style="animation-delay: 0.6s;">
+                    <div class="card-badge">Хит</div>
+                    <div class="card-img" style="background: linear-gradient(45deg, #FFFFFF, #E0F2F1);">🤍</div>
+                    <div class="card-body">
+                        <h3>Невестин вальс</h3>
+                        <p>белые розы, фрезия, пион</p>
+                        <strong>8 200 ₸</strong>
+                        <button class="btn-card">В корзину</button>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="order">
+            <div class="order-container">
+                <h2>Оформить заказ</h2>
+                <form class="order-form">
+                    <input type="text" required placeholder="Ваше имя">
+                    <input type="tel" required placeholder="+7 (___) ___-__-__">
+                    <input type="text" required placeholder="Улица, дом, квартира" class="full-width">
+                    <input type="date" required>
+                    <select required>
+                        <option value="" disabled selected>Время доставки</option>
+                        <option>08:00–10:00</option>
+                        <option>10:00–12:00</option>
+                        <option>12:00–14:00</option>
+                        <option>14:00–18:00</option>
+                        <option>18:00–22:00</option>
+                    </select>
+                    <select required class="full-width">
+                        <option value="" disabled selected>Повод</option>
+                        <option>День рождения</option>
+                        <option>Свадьба</option>
+                        <option>Юбилей</option>
+                        <option>Романтика</option>
+                        <option>Просто так</option>
+                        <option>Корпоратив</option>
+                    </select>
+                    <textarea rows="4" class="full-width" placeholder="Любимые цветы, цвета, особые пожелания…"></textarea>
+                    <button type="submit" class="btn-order full-width">Заказать с доставкой 🌸</button>
+                </form>
+            </div>
+        </section>
+
+        <section class="reviews">
+            <h2>Что говорят наши клиенты</h2>
+            <div class="reviews-grid">
+                <div class="review-card" style="animation-delay: 0.2s;">
+                    <div class="stars">★★★★★</div>
+                    <p>«Заказывала букет на день рождения мамы — доставили вовремя, цветы свежайшие, упаковка просто сказочная. Мама была в восторге!»</p>
+                    <div class="author">👩 Алия М., 12 марта 2025</div>
+                </div>
+                <div class="review-card" style="animation-delay: 0.4s;">
+                    <div class="stars">★★★★★</div>
+                    <p>«Брал букет невесты на свадьбу. Флористы учли все пожелания, результат превзошёл ожидания. Отдельное спасибо за оперативную связь.»</p>
+                    <div class="author">👨 Данияр К., 28 февраля 2025</div>
+                </div>
+                <div class="review-card" style="animation-delay: 0.6s;">
+                    <div class="stars">★★★★★</div>
+                    <p>«Корпоративное оформление офиса — всё на высшем уровне. Цены разумные, качество отличное. Рекомендую всем коллегам!»</p>
+                    <div class="author">👩 Мадина Р., 5 апреля 2025</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="location" id="location">
+            <h2>Мы находимся</h2>
+            <div class="location-grid">
+                <div class="loc-info">
+                    <p>📍 г. Алматы, пр. Абая, 1</p>
+                    <p>📞 +7 (777) 123-45-67</p>
+                    <p>📧 info@spring-bouquet.kz</p>
+                    <p>🕐 Ежедневно: 08:00 – 22:00</p>
+                    <br>
+                    <a href="https://www.google.com/maps" target="_blank" class="btn btn-primary">Построить маршрут</a>
+                </div>
+                <div>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2906.770223533261!2d76.95353531548443!3d43.24578197913745!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38836ec7e3e09879%3A0x6b199e69317f223f!2sAbay%20Ave%201%2C%20Almaty%2C%20Kazakhstan!5e0!3m2!1sen!2s!4v1650000000000!5m2!1sen!2s" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col" id="about">
+                <h4>О магазине 🌸</h4>
+                <p>«Весенний букет» — это не просто магазин, а команда флористов, влюбленных в свое дело. Создаем красоту с 2015 года.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Навигация</h4>
+                <ul>
+                    <li><a href="#catalog">Каталог</a></li>
+                    <li><a href="#">Доставка и оплата</a></li>
+                    <li><a href="#">О нас</a></li>
+                    <li><a href="#">Блог</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Контакты</h4>
+                <ul>
+                    <li>📞 +7 (777) 123-45-67</li>
+                    <li>📧 info@spring-bouquet.kz</li>
+                    <li>📱 Instagram, WhatsApp, Telegram</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2025 Весенний букет. Все права защищены.
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('mobile-menu');
+        const navList = document.getElementById('nav-list');
+
+        menuToggle.addEventListener('click', () => {
+            navList.classList.toggle('active');
+            menuToggle.textContent = navList.classList.contains('active') ? '✕' : '☰';
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    // Close mobile menu if open
+                    navList.classList.remove('active');
+                    menuToggle.textContent = '☰';
+                }
+            });
+        });
+
+        // Simple Form Submission Alert
+        document.querySelector('.order-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Спасибо за заказ! Наш флорист свяжется с вами в течение 10 минут 🌸');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
